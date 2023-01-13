@@ -122,14 +122,31 @@ export default {
         const valutes = this.getCurrencies?.Valute
         if (valutes) {
           let arrayOfObj = Object.entries(valutes).map(e => e[1])
-          const valuteOne = arrayOfObj.find(val => val?.CharCode === this.form.currency_one)
-          const valuteTwo = arrayOfObj.find(val => val?.CharCode === this.form.currency_two)
-          //рубли
-          if(['RUB', 'Рубли'].includes(this.form.currency_two) || ['RUB', 'Рубли'].includes(this.form.currency_one)) {
+          const valuteOne = arrayOfObj.find(val => (val?.CharCode.toLowerCase() === this.form.currency_one.toLowerCase()) || (val?.Name.toLowerCase() === this.form.currency_one.toLowerCase()))
+          const valuteTwo = arrayOfObj.find(val => (val?.CharCode.toLowerCase() === this.form.currency_two.toLowerCase()) || (val?.Name.toLowerCase() === this.form.currency_two.toLowerCase()))
+          // из рублей во что то
+          if(['RUB', 'rub', 'российский рубль', 'Российский рубль'].includes(this.form.currency_one.toLowerCase())) {
+            if (valuteTwo) {
+              return {
+                val: (valuteTwo?.Nominal / valuteTwo?.Value) * this.form.quantity,
+                currency: valuteTwo?.CharCode
+              }
+            }
+          }
+          //из чего то в рубли
+          if(['RUB','rub', 'российский рубль', 'Российский рубль'].includes(this.form.currency_two.toLowerCase())) {
             if (valuteOne) {
-              return (valuteOne.Value * this.form.quantity).toFixed(2)
-            } else if (valuteTwo){
-              return (valuteTwo.Value * this.form.quantity).toFixed(2)
+              if(valuteOne?.Nominal === 1) {
+                return {
+                  val: valuteOne?.Value * this.form.quantity,
+                  currency: 'RUB'
+                }
+              } else if(valuteOne?.Nominal > 1) {
+                return {
+                  val: (valuteOne?.Value / valuteOne?.Nominal) * this.form.quantity,
+                  currency: 'RUB'
+                }
+              }
             }
           }
           //остальные
