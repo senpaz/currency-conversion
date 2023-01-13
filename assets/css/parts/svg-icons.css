@@ -1,0 +1,25 @@
+.svg-icon {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+  height: 1em;
+  width: 1em;
+  pointer-events: none;
+}
+
+.svg-fill {
+  fill: currentColor;
+}
+.svg-i{
+  font-size: 20px;
+  color: #E02025;
+}
+@media (min-width: 1280px) {
+  .svg-i{
+    font-size: 25px;
+  }
+}
+.svg-money{
+  color: #0F4471;
+  font-size: 35px;
+}

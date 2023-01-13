@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/currency", {data:[{}],fetch:{},mutations:[]});
