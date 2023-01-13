@@ -1,6 +1,6 @@
 # Приложение Валютный калькулятор (пока что MVP)
 
-Сылка на приложение - https://senpaz.github.io/currency-conversion/
+Ссылка на приложение - https://senpaz.github.io/currency-conversion/
 
 Возможность конвертировать сумму из любой валюты в любую другую
 
